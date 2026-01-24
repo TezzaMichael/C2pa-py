@@ -4,11 +4,14 @@ import requests
 import c2pa
 import sys
 
-# --- CONFIGURAZIONE ---
+DEFAULT_ANCHORS = 'https://contentcredentials.org/trust/anchors.pem'
+DEFAULT_ALLOWED = 'https://contentcredentials.org/trust/allowed.sha256.txt'
+DEFAULT_CONFIG = 'https://contentcredentials.org/trust/store.cfg'
+
 CONFIG_URLS = {
-    "anchors": "https://contentcredentials.org/trust/anchors.pem",
-    "allowed": "https://contentcredentials.org/trust/allowed.sha256.txt",
-    "config": "https://contentcredentials.org/trust/store.cfg"
+    "anchors": os.environ.get('C2PATOOL_TRUST_ANCHORS', DEFAULT_ANCHORS),
+    "allowed": os.environ.get('C2PATOOL_ALLOWED_LIST', DEFAULT_ALLOWED),
+    "config": os.environ.get('C2PATOOL_TRUST_CONFIG', DEFAULT_CONFIG)
 }
 
 FILES = {
@@ -157,44 +160,56 @@ def align_with_rust_logic(json_data):
 
     return json_data
 
-def main(image_path):
+def main(image_path, trust_opts={}):
+    if trust_opts.get("trust_anchors"):
+        CONFIG_URLS["anchors"] = trust_opts["trust_anchors"]
+    if trust_opts.get("allowed_list"):
+        CONFIG_URLS["allowed"] = trust_opts["allowed_list"]
+    if trust_opts.get("trust_config"):
+        CONFIG_URLS["config"] = trust_opts["trust_config"]
+        
     download_trust_files()
+
     anchors = read_file_content(FILES["anchors"])
     allowed = read_file_content(FILES["allowed"])
     cfg = read_file_content(FILES["config"])
     
     settings = { "verify": { "verify_trust": True }, "trust": {} }
+    
     if anchors: settings["trust"]["trust_anchors"] = anchors
     if allowed: settings["trust"]["allowed_list"] = allowed
     if cfg: settings["trust"]["trust_config"] = cfg
 
-    try:
-        if hasattr(c2pa, 'load_settings'):
-            c2pa.load_settings(json.dumps(settings))
-    except:
-        pass
+    c2pa.load_settings(json.dumps(settings))
 
     try:
         reader = c2pa.Reader(image_path)
         raw_output = reader.json()
         if not raw_output: sys.exit(1)
 
-        if isinstance(raw_output, str):
-            json_data = json.loads(raw_output)
-        elif isinstance(raw_output, dict):
-            json_data = raw_output
-        else:
-            sys.exit(1)
-        
-        # --- ALLINEAMENTO ---
+        json_data = json.loads(raw_output)
         json_data = align_with_rust_logic(json_data)
 
         print(json.dumps(json_data, indent=2))
-        with open("python_output.json", "w") as f:
-            json.dump(json_data, f, indent=2)
 
     except Exception:
         sys.exit(1)
+
+def cmd_trust(path: str, trust_opts: dict[str, any]):
+    main(path, trust_opts)
+
+def print_trust_help():
+    help_text = f"""Sub-command to configure trust store options, "trust --help for more details"
+
+Usage: python3 c2pa.py <PATH> trust [OPTIONS]
+
+Options:
+      --trust_anchors <TRUST_ANCHORS>  URL or path to file containing list of trust anchors in PEM format [env: C2PATOOL_TRUST_ANCHORS={CONFIG_URLS['anchors']}]
+      --allowed_list <ALLOWED_LIST>    URL or path to file containing specific manifest signing certificates in PEM format to implicitly trust [env: C2PATOOL_ALLOWED_LIST={CONFIG_URLS['allowed']}]
+      --trust_config <TRUST_CONFIG>    URL or path to file containing configured EKUs in Oid dot notation [env: C2PATOOL_TRUST_CONFIG={CONFIG_URLS['config']}]
+  -h, --help                           Print help
+    """
+    print(help_text)
 
 if __name__ == "__main__":
     target = sys.argv[1] if len(sys.argv) > 1 else "image.png"

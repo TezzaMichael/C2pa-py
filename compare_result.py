@@ -46,7 +46,7 @@ for image in DATASET_DIR.rglob("*"):
 
     # --- Python implementation ---
     #py_cmd = ["python3.12", "c2pa_py.py", str(image), "trust"] + TRUST_ARGS
-    py_cmd = ["python3.12", "trust2.py", str(image)]
+    py_cmd = ["python3.12", "trust.py", str(image)]
     py_json = run_json(py_cmd)
     py_state = get_validation_state(py_json)
 
