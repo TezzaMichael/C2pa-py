@@ -7,7 +7,6 @@ Usage:
     python c2pa.py <PATH> --info                       # Show manifest info
     python c2pa.py <PATH> --tree                       # Show tree view
     python c2pa.py <PATH> --detailed                   # Detailed JSON output
-    python c2pa.py <PATH> --certs                      # Extract certificates
     python c2pa.py <PATH> --ingredient                 # Extract ingredients
     python c2pa.py <PATH> --output <FOLDER>          # Save JSON to file
     python c2pa.py <PATH> trust                        # Trust verification
@@ -20,8 +19,12 @@ import os
 from pathlib import Path
 from typing import Optional, Dict, Any
 import c2pa
-from trust import cmd_trust, print_trust_help
-from info import cmd_info
+from cmd.trust import cmd_trust, print_trust_help
+from cmd.info import cmd_info
+from cmd.tree import cmd_tree
+from cmd.detailed import cmd_detailed
+from cmd.ingredient import cmd_ingredient
+from cmd.output import cmd_output
 
 
 
@@ -88,9 +91,6 @@ def main():
         elif arg == '--detailed':
             command = 'detailed'
             i += 1
-        elif arg == '--certs':
-            command = 'certs'
-            i += 1
         elif arg == '--ingredient':
             command = 'ingredient'
             i += 1
@@ -131,20 +131,16 @@ def main():
     try:
         if command == 'info':
             cmd_info(path)
-            #TODO: sistemare
         elif command == 'tree':
-            #TODO: cmd_tree(path)
-            pass
+            cmd_tree(path)
         elif command == 'detailed':
-            cmd_default(path)
-        elif command == 'certs':
-            #TODO: cmd_certs(path, output)
-            pass
+            cmd_detailed(path, output)
         elif command == 'ingredient':
-            #TODO: cmd_ingredient(path, output)
-            pass
+            cmd_ingredient(path)
         elif command == 'trust':
             cmd_trust(path, trust_opts)
+        elif command == 'output':
+            cmd_output(path, output)
         else:
             # Default: print JSON
             cmd_default(path, output)
@@ -169,7 +165,6 @@ OPTIONS:
     --info          Show manifest store information
     --tree          Show manifest tree structure
     --detailed      Show detailed C2PA-formatted JSON
-    --certs         Extract certificate chain
     --ingredient    Extract ingredient information
     --output <FILE> Save output to file instead of stdout
     --help, -h      Print this help message
@@ -181,7 +176,7 @@ EXAMPLES:
     python c2pa.py image.png                           # Print JSON manifest
     python c2pa.py image.png --info                    # Show info
     python c2pa.py image.png --tree                    # Show tree view
-    python c2pa.py image.png --output manifest.json    # Save to file
+    python c2pa.py image.png --output path   # Save to file
     python c2pa.py image.png trust                     # Verify trust
     python c2pa.py image.png trust --help              # Trust options
 
