@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-C2PA Detailed View Tool - Replicates c2patool --detailed output
-Usage: python detailed.py <image_path>
+C2PA Detailed View Tool - Replicates c2patool --detailed
+Usage: python3 detailed.py <image_path>
 """
 
 import os
@@ -14,34 +14,22 @@ import c2pa
 def print_detailed(image_path):
     """Print detailed C2PA manifest view"""
     
-    # Read manifest
-    try:
+    try: 
         reader = c2pa.Reader(image_path)
         raw_output = reader.json()
-        
+            
         if not raw_output:
             print(f"No manifest found in {image_path}")
             return
-        
-        # Parse JSON
-        if isinstance(raw_output, str):
-            json_data = json.loads(raw_output)
-        elif isinstance(raw_output, dict):
-            json_data = raw_output
-        else:
-            print(f"Invalid manifest data")
-            return
-        
+        json_data = json.loads(raw_output)
+            
         # Convert to detailed format (matching Rust output structure)
         detailed_output = convert_to_detailed_format(json_data)
-        
+            
         # Print as formatted JSON
         print(json.dumps(detailed_output, indent=2, ensure_ascii=False))
-        
-    except Exception as e:
-        print(f"Error reading manifest: {e}")
-        import traceback
-        traceback.print_exc()
+    except Exception:
+        print(f"No manifest found in {image_path}")
         sys.exit(1)
 
 

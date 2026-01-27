@@ -21,6 +21,9 @@ FILES = {
 }
 
 def download_trust_files():
+    """
+    Download trust files if they do not exist locally
+    """
     for key, url in CONFIG_URLS.items():
         if not os.path.exists(FILES[key]):
             try:
@@ -31,6 +34,9 @@ def download_trust_files():
                 pass
 
 def read_file_content(filename):
+    """
+    Read content of a file if it exists
+    """
     if os.path.exists(filename):
         with open(filename, "r", encoding="utf-8") as f:
             return f.read().strip()
@@ -38,7 +44,7 @@ def read_file_content(filename):
 
 def recursive_find_errors(data, invalid_codes):
     """
-    Cerca ricorsivamente errori fatali (Mismatch, Invalid, Revoked).
+    Find if any invalid error codes are present in the data structure
     """
     if isinstance(data, dict):
         if "code" in data and isinstance(data["code"], str):
@@ -57,57 +63,55 @@ def recursive_find_errors(data, invalid_codes):
 
 def check_history_integrity_strict(json_data):
     """
-    LOGICA DOWNGRADE:
-    1. Generatori di Test (SOLO SU INGREDIENTI).
-       - C2PA Testing
-       - make_test_images
-       - TestApp (NUOVO!)
-    2. Ingredienti Untrusted.
-    3. Deep Scan per errori fatali.
+    Check history integrity with strict rules:
+    1. No ingredient created by Test software
+    2. No ingredient signed by Test certificates
+    3. No ingredient marked as Untrusted
+    4. No fatal errors in entire manifest
+    5. No ingredient delta failures
     """
-    
     active_id = json_data.get("active_manifest", "")
     manifests = json_data.get("manifests", {})
 
-    # 1. Scansione Manifesti
     for man_id, content in manifests.items():
         
-        # LA REGOLA D'ORO: Siamo severi solo con la STORIA (Ingredienti).
+        # check manifest not active
         if man_id != active_id:
             
-            # A. Filtro Generatore (Anti-Test AGGIORNATO)
             generator = content.get("claim_generator", "").lower()
-            # Aggiunto "testapp" alla lista
+            
+            # 1. Check if generator is Test software
             if "c2pa testing" in generator or "make_test_images" in generator or "testapp" in generator:
                 return False, f"Ingredient '{man_id}' created by Test software: {content.get('claim_generator')}."
 
-            # B. Controllo UNTRUSTED
+            # 2. Check if ingredient is Untrusted
             status = content.get("validation_status", [])
             for err in status:
                 if err.get("code") == "signingCredential.untrusted":
                     return False, f"Ingredient '{man_id}' is Untrusted (Chain Broken)."
             
-            # C. Controllo Issuer Test
+            # 3. Check signature issuer for Test Certificates
             sig_info = content.get("signature_info", {})
             issuer = sig_info.get("issuer", "")
             cn = sig_info.get("common_name", "")
             if "Test Signing" in issuer or "Test Signing" in cn:
                  return False, f"Ingredient '{man_id}' signed by Test Certificate."
 
-    # 2. Deep Scan per errori fatali
     FATAL_SUBSTRINGS = [
         "mismatch",                
         "signingCredential.invalid", 
         "signingCredential.revoked"
     ]
-    
+
+    # 4. Check entire manifest for fatal errors
     found_error, reason = recursive_find_errors(json_data, FATAL_SUBSTRINGS)
     if found_error:
         return False, reason
 
-    # 3. Controllo Delta Ingredienti (Fallback)
+    # 5. Check ingredient deltas for failures
     val_results = json_data.get("validation_results", {})
     deltas = val_results.get("ingredientDeltas", [])
+    print("Deltas:", deltas)
     for delta in deltas:
         failures = delta.get("validationDeltas", {}).get("failure", [])
         if failures:
@@ -115,10 +119,9 @@ def check_history_integrity_strict(json_data):
 
     return True, "History clean"
 
-def check_active_manifest_trust(json_data):
+def is_valid(json_data):
     """
-    LOGICA UPGRADE:
-    Se la storia è pulita e l'unico problema è che il capo è Untrusted -> Valid.
+    Check if active manifest is valid
     """
     active_manifest = json_data.get("validation_results", {}).get("activeManifest", {})
     successes = active_manifest.get("success", [])
@@ -130,15 +133,18 @@ def check_active_manifest_trust(json_data):
     errors = json_data.get("validation_status", [])
     for err in errors:
         code = err.get("code", "")
+        #print("Active manifest error code:", code)
         if code != "signingCredential.untrusted":
             return False
             
     return True
 
-def align_with_rust_logic(json_data):
+def update_validation_state(json_data):
+    """
+    Update validation state based on history integrity and current state
+    """
     current_state = json_data.get("validation_state")
 
-    # FASE 1: CONTROLLO STORIA (Downgrade)
     is_history_clean, reason = check_history_integrity_strict(json_data)
     
     if not is_history_clean:
@@ -153,14 +159,15 @@ def align_with_rust_logic(json_data):
             })
         return json_data
 
-    # FASE 2: PROMOZIONE (Upgrade)
+    # If history is clean and current state is Invalid, check if we can upgrade to Valid
     if current_state == "Invalid":
-        if check_active_manifest_trust(json_data):
+        if is_valid(json_data):
             json_data["validation_state"] = "Valid"
 
     return json_data
 
-def main(image_path, trust_opts={}):
+def main(path, trust_opts={}):
+    # trust_opts keys: trust_anchors, allowed_list, trust_config
     if trust_opts.get("trust_anchors"):
         CONFIG_URLS["anchors"] = trust_opts["trust_anchors"]
     if trust_opts.get("allowed_list"):
@@ -174,6 +181,7 @@ def main(image_path, trust_opts={}):
     allowed = read_file_content(FILES["allowed"])
     cfg = read_file_content(FILES["config"])
     
+    # Configure C2PA trust settings
     settings = { "verify": { "verify_trust": True }, "trust": {} }
     
     if anchors: settings["trust"]["trust_anchors"] = anchors
@@ -183,16 +191,18 @@ def main(image_path, trust_opts={}):
     c2pa.load_settings(json.dumps(settings))
 
     try:
-        reader = c2pa.Reader(image_path)
+        reader = c2pa.Reader(path)
         raw_output = reader.json()
         if not raw_output: sys.exit(1)
 
         json_data = json.loads(raw_output)
-        json_data = align_with_rust_logic(json_data)
+        # Update validation state based on custom logic
+        json_data = update_validation_state(json_data)
 
         print(json.dumps(json_data, indent=2))
 
     except Exception:
+        print(f"No manifest found in {path}")
         sys.exit(1)
 
 def cmd_trust(path: str, trust_opts: dict[str, any]):

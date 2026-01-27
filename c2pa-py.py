@@ -19,29 +19,26 @@ import os
 from pathlib import Path
 from typing import Optional, Dict, Any
 import c2pa
-from cmd.trust import cmd_trust, print_trust_help
-from cmd.info import cmd_info
-from cmd.tree import cmd_tree
-from cmd.detailed import cmd_detailed
-from cmd.ingredient import cmd_ingredient
-from cmd.output import cmd_output
+from commands.trust import cmd_trust, print_trust_help
+from commands.info import cmd_info
+from commands.tree import cmd_tree
+from commands.detailed import cmd_detailed
+from commands.ingredient import cmd_ingredient
+from commands.output import cmd_output
 
 
 
 
-def cmd_default(path: str, output: Optional[str] = None):
+def cmd_default(path: str):
     """Default command: print JSON manifest with validation"""
-    reader = c2pa.Reader(path)
-    raw_output = reader.json()
-    json_data = json.loads(raw_output)
-    print(json.dumps(json_data, indent=2))
-
-
-
-def cmd_detailed(path: str, output: Optional[str] = None):
-    """Show detailed C2PA-formatted JSON"""
-    cmd_default(path, output)  # Same as default
-
+    try:
+        reader = c2pa.Reader(path)
+        raw_output = reader.json()
+        json_data = json.loads(raw_output)
+        print(json.dumps(json_data, indent=2))
+    except Exception:
+        print(f"No manifest found in {path}")
+        sys.exit(1)
 
 def main():
     """Main CLI entry point"""
@@ -67,39 +64,33 @@ def main():
         sys.exit(1)
     
     # Parse options and commands
-    output = None
     command = None
     trust_opts = {}
     
     i = 0
+    if len(args) == 0:
+        cmd_default(path)
+
     while i < len(args):
         arg = args[i]
         
         if arg == '--output':
             if i + 1 < len(args):
-                output = args[i + 1]
-                i += 2
+                cmd_output(path, args[i + 1])
             else:
                 print("Error: --output requires a value", file=sys.stderr)
                 sys.exit(1)
         elif arg == '--info':
-            command = 'info'
-            i += 1
+            cmd_info(path)
         elif arg == '--tree':
-            command = 'tree'
-            i += 1
+            cmd_tree(path)
         elif arg == '--detailed':
-            command = 'detailed'
-            i += 1
+            cmd_detailed(path)
         elif arg == '--ingredient':
-            command = 'ingredient'
-            i += 1
+            cmd_ingredient(path)
         elif arg == 'trust':
-            command = 'trust'
             i += 1
-            
-            # Parse trust options
-            include_manifests = False
+
             while i < len(args):
                 if args[i] == '--help':
                     print_trust_help()
@@ -118,7 +109,8 @@ def main():
                     print("Use 'trust --help' for available options.", file=sys.stderr)
                     sys.exit(1)
             
-            trust_opts['include_manifests'] = include_manifests
+            cmd_trust(path, trust_opts)
+            
         elif arg == '--help' or arg == '-h':
             print_help()
             sys.exit(0)
@@ -127,29 +119,6 @@ def main():
             print("Use --help for usage information.", file=sys.stderr)
             sys.exit(1)
     
-    # Execute command
-    try:
-        if command == 'info':
-            cmd_info(path)
-        elif command == 'tree':
-            cmd_tree(path)
-        elif command == 'detailed':
-            cmd_detailed(path, output)
-        elif command == 'ingredient':
-            cmd_ingredient(path)
-        elif command == 'trust':
-            cmd_trust(path, trust_opts)
-        elif command == 'output':
-            cmd_output(path, output)
-        else:
-            # Default: print JSON
-            cmd_default(path, output)
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
-
 
 def print_help():
     """Print main help message"""

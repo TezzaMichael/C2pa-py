@@ -1,0 +1,1553 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>C2PA Validation Comparison Report</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f9; }
+            h1 { color: #333; }
+            .summary-box { display: flex; gap: 20px; margin-bottom: 30px; }
+            .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex: 1; text-align: center; }
+            .card h2 { margin: 0; font-size: 36px; color: #007bff; }
+            .card p { margin: 5px 0 0; color: #666; font-weight: bold; }
+            
+            table { width: 100%; border-collapse: collapse; margin-bottom: 40px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #007bff; color: white; }
+            tr:hover { background-color: #f1f1f1; }
+            
+            .status-Correct { color: green; font-weight: bold; }
+            .status-Mismatch { color: red; font-weight: bold; }
+            
+            .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; color: white; font-weight: bold; }
+            .badge-Valid { background-color: #28a745; }
+            .badge-Invalid { background-color: #dc3545; }
+            .badge-Trusted { background-color: #17a2b8; }
+            .badge-ERROR_TOOL_FAILED { background-color: #6c757d; }
+            .badge-MISSING { background-color: #ffc107; color: black; }
+
+            .folder-header { background-color: #e9ecef; font-weight: bold; color: #495057; }
+        </style>
+    </head>
+    <body>
+        <h1>C2PA Tool Comparison Report</h1>
+        <p>Generated on: 2026-01-25 14:47:07</p>
+
+        <div class="summary-box">
+            <div class="card">
+                <h2>200</h2>
+                <p>Total Files</p>
+            </div>
+            <div class="card">
+                <h2 style="color: green;">200</h2>
+                <p>Matches (Correct)</p>
+            </div>
+            <div class="card">
+                <h2 style="color: green;">0</h2>
+                <p>Mismatches</p>
+            </div>
+            <div class="card">
+                <h2>100.00%</h2>
+                <p>Accuracy</p>
+            </div>
+        </div>
+
+        <h2>Folder Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Folder</th>
+                    <th>Files</th>
+                    <th>Matches</th>
+                    <th>Mismatches</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td><b>AdobeFirefly</b></td>
+                    <td>36</td>
+                    <td>36</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>ChatGPT</b></td>
+                    <td>29</td>
+                    <td>29</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>ChatGPT + Python Post-Processing</b></td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>ChatGPT+ Online Post-Processing</b></td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>Root</b></td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>Dall-e3</b></td>
+                    <td>36</td>
+                    <td>36</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>FLUX.1</b></td>
+                    <td>47</td>
+                    <td>47</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+                <tr>
+                    <td><b>c2paTest</b></td>
+                    <td>41</td>
+                    <td>41</td>
+                    <td style="color: inherit">0</td>
+                    <td>100.0%</td>
+                </tr>
+        
+            </tbody>
+        </table>
+
+        <h2>Detailed Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image Path</th>
+                    <th>Rust State</th>
+                    <th>Python State</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td>AdobeFirefly/img_0.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_1.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_10.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_11.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_12.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_13.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_14.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_15.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_16.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_17.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_18.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_19.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_2.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_20.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_21.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_22.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_23.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_24.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_25.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_26.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_27.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_28.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_29.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_3.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_30.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_31.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_32.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_33.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_34.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_35.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_4.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_5.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_6.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_7.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_8.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>AdobeFirefly/img_9.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image Apr 3, 2025, 11_28_23 AM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image Apr 30, 2025, 12_12_00 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image Apr 4, 2025, 10_10_15 AM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image Apr 8, 2025, 05_42_56 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image Apr 8, 2025, 05_47_46 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 10, 2025, 11_50_27 AM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 15, 2025, 04_27_18 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 19, 2025, 02_22_05 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 19, 2025, 02_23_24 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 19, 2025, 03_10_50 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 21, 2025, 05_42_36 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 8, 2025, 05_55_04 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 8, 2025, 05_58_23 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 8, 2025, 06_05_39 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 8, 2025, 06_17_50 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ChatGPT Image May 8, 2025, 06_18_24 PM.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/IJCNN.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/IJCNN2.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/cracco.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/ihmmsec.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img1.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img2.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img3.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img4.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img5.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img6.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/img7.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/logo_forensics.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT/logo_forensics_2.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT + Python Post-Processing/img1_edited.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT + Python Post-Processing/img2_edited.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT + Python Post-Processing/img3_edited.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT + Python Post-Processing/img4_edited.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT + Python Post-Processing/img5_edited.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT+ Online Post-Processing/24ff0494-1334-465e-8a42-3d50b5faff96.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT+ Online Post-Processing/ChatGPT Image May 19, 2025, 01_36_31 PM.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT+ Online Post-Processing/ChatGPT Image May 19, 2025, 11_21_32 AM.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT+ Online Post-Processing/OFF.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPT+ Online Post-Processing/deepfake_evolution_landscape.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>ChatGPTExample.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_0.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_1.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_10.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_11.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_12.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_13.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_14.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_15.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_16.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_17.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_18.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_19.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_2.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_20.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_21.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_22.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_23.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_24.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_25.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_26.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_27.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_28.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_29.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_3.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_30.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_31.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_32.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_33.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_34.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_35.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_4.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_5.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_6.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_7.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_8.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>Dall-e3/img_9.png</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_0.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_1.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_10.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_11.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_12.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_13.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_14.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_15.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_16.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_17.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_18.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_19.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_2.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_20.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_21.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_22.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_23.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_24.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_25.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_26.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_27.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_28.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_29.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_3.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_30.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_31.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_32.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_33.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_34.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_35.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_36.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_37.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_38.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_39.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_4.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_40.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_41.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_42.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_43.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_44.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_45.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_46.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_5.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_6.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_7.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_8.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>FLUX.1/img_9.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/A.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/A_thumbnail.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/C-recorded-as-mov.mov</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/C.dng</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/C.jpg</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/CA.jpg</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/CACAE-uri-CA.jpg</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/CA_ct.jpg</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/CIE-sig-CA.jpg</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/C_with_CAWG_data.jpg</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/E-sig-CA.jpg</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/IMG_0003.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/P1000827.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/XCA.jpg</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/boxhash.jpg</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/cloud.jpg</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/cloudx.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/earth_apollo17.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/exp-test1.png</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/file_with_wrong_extension.xyz.jpg</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/legacy.mp4</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/legacy_ingredient_hash.jpg</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/libpng-test.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/mars.webp</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/pdf-file.pdf</td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td><span class="badge badge-Trusted">Trusted</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/prerelease.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.avif</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.gif</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.heic</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.heif</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.m4a</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.mp3</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.png</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1.webp</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/sample1_signed.wav</td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td><span class="badge badge-Valid">Valid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/test.avi</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/test.webp</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/test_lossless.webp</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/test_xmp.webp</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/thumbnail.jpg</td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td><span class="badge badge-ERROR_TOOL_FAILED">ERROR_TOOL_FAILED</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+                <tr>
+                    <td>c2paTest/video1.mp4</td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td><span class="badge badge-Invalid">Invalid</span></td>
+                    <td class="status-Correct">Correct</td>
+                </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    
