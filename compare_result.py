@@ -208,14 +208,14 @@ def main():
 
         # --- Python implementation ---
         # py_cmd = ["python3", "c2pa-py.py", str(image), "trust"] + TRUST_ARGS
-        py_cmd = [sys.executable, "cmd/trust.py", str(image)]
+        py_cmd = [sys.executable, "commands/trust.py", str(image)]
         py_json = run_json(py_cmd)
         py_state = get_validation_state(py_json)
 
         is_correct = (rust_state == py_state)
         result_str = "Correct" if is_correct else "Not Correct"
 
-        # Aggiorna statistiche
+        # update stats
         stats["total"] += 1
         folder_stats[folder_name]["total"] += 1
         
@@ -228,7 +228,7 @@ def main():
 
         rows.append([str(relative_path), rust_state, py_state, result_str])
 
-    # Calcolo accuracy
+    # Accuracy calculation
     stats["accuracy"] = (stats["correct"] / stats["total"] * 100) if stats["total"] > 0 else 0
 
     print(f"\n\n{'='*60}")
@@ -240,7 +240,7 @@ def main():
     print(f"Accuracy:    {stats['accuracy']:.2f}%")
     print(f"{'='*60}\n")
 
-    # Stampa tabella per folder in console
+    # Print folder breakdown
     print(f"{'FOLDER':<30} | {'FILES':<6} | {'MATCH':<6} | {'ACCURACY':<8}")
     print("-" * 60)
     for folder, s in sorted(folder_stats.items()):
@@ -248,14 +248,14 @@ def main():
         print(f"{folder:<30} | {s['total']:<6} | {s['correct']:<6} | {acc:.1f}%")
     print("-" * 60)
 
-    # Scrittura CSV
+    # CSV
     with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["Image", "Rust_validation", "Python_validation", "Result"])
         writer.writerows(rows)
     print(f"\n CSV Data written to: {OUTPUT_CSV}")
 
-    # Scrittura HTML
+    # HTML
     generate_html_report(rows, stats, folder_stats)
 
 if __name__ == "__main__":

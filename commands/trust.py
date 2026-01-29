@@ -61,7 +61,7 @@ def recursive_find_errors(data, invalid_codes):
             if found: return True, reason
     return False, None
 
-def check_history_integrity_strict(json_data):
+def check_manifest(json_data):
     """
     Check history integrity with strict rules:
     1. No ingredient created by Test software
@@ -97,21 +97,21 @@ def check_history_integrity_strict(json_data):
             if "Test Signing" in issuer or "Test Signing" in cn:
                  return False, f"Ingredient '{man_id}' signed by Test Certificate."
 
-    FATAL_SUBSTRINGS = [
+    ERRORS = [
         "mismatch",                
         "signingCredential.invalid", 
         "signingCredential.revoked"
     ]
 
     # 4. Check entire manifest for fatal errors
-    found_error, reason = recursive_find_errors(json_data, FATAL_SUBSTRINGS)
+    found_error, reason = recursive_find_errors(json_data, ERRORS)
     if found_error:
         return False, reason
 
     # 5. Check ingredient deltas for failures
     val_results = json_data.get("validation_results", {})
     deltas = val_results.get("ingredientDeltas", [])
-    print("Deltas:", deltas)
+    #("Deltas:", deltas)
     for delta in deltas:
         failures = delta.get("validationDeltas", {}).get("failure", [])
         if failures:
@@ -145,7 +145,7 @@ def update_validation_state(json_data):
     """
     current_state = json_data.get("validation_state")
 
-    is_history_clean, reason = check_history_integrity_strict(json_data)
+    is_history_clean, reason = check_manifest(json_data)
     
     if not is_history_clean:
         json_data["validation_state"] = "Invalid"
