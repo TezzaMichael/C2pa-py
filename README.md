@@ -89,42 +89,6 @@ To use the tool, run c2pa-py.py with the path to your image and the desired opti
 python3 c2pa-py.py <image> --help
 ```
 
-###### Output:
-
-```plaintext
-c2patool_py - Python implementation of c2patool
-
-USAGE:
-    python main.py <PATH> [OPTIONS|COMMAND]
-
-ARGS:
-    <PATH>    Path to image file with C2PA manifest
-
-OPTIONS:
-    --info          Show manifest store information
-    --tree          Show manifest tree structure
-    --detailed      Show detailed C2PA-formatted JSON
-    --ingredient    Extract ingredient information
-    --output <FILE> Save output to file instead of stdout
-    --help, -h      Print this help message
-
-COMMANDS:
-    trust           Verify trust of C2PA manifest (use 'trust --help' for options)
-
-EXAMPLES:
-    python c2pa.py image.png                       # Print JSON manifest
-    python c2pa.py image.png --info                # Show info
-    python c2pa.py image.png --tree                # Show tree view
-    python c2pa.py image.png --output path   # Save to file
-    python c2pa.py image.png trust                 # Verify trust
-    python c2pa.py image.png trust --help          # Trust options
-
-ENVIRONMENT VARIABLES:
-    C2PATOOL_TRUST_ANCHORS    URL or path to trust anchors PEM file
-    C2PATOOL_ALLOWED_LIST     URL or path to allowed certificates list
-    C2PATOOL_TRUST_CONFIG     URL or path to trust configuration
-```
-
 ---
 
 ## Trust Verification
@@ -134,19 +98,7 @@ The trust command allows you to verify the validity of the file using specific c
 ```bash
 python3 c2pa-py.py <image> trust --help
 ```
-###### Output:
 
-```plaintext
-Sub-command to configure trust store options, "trust --help for more details"
-
-Usage: python3 c2pa.py <PATH> trust [OPTIONS]
-
-Options:
-      --trust_anchors <TRUST_ANCHORS>  URL or path to file containing list of trust anchors in PEM format [env: C2PATOOL_TRUST_ANCHORS=https://contentcredentials.org/trust/anchors.pem]
-      --allowed_list <ALLOWED_LIST>    URL or path to file containing specific manifest signing certificates in PEM format to implicitly trust [env: C2PATOOL_ALLOWED_LIST=https://contentcredentials.org/trust/allowed.sha256.txt]
-      --trust_config <TRUST_CONFIG>    URL or path to file containing configured EKUs in Oid dot notation [env: C2PATOOL_TRUST_CONFIG=https://contentcredentials.org/trust/store.cfg]
-  -h, --help                           Print help
-  ```
 ######  Example: Verify an Image
 
 ```bash
