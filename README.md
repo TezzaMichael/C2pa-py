@@ -153,3 +153,24 @@ Options:
 python3 c2pa-py.py my_image.jpg trust
 ```
 This will download the latest trust lists, validate the full history of the image, and output the validation state (Valid, Invalid, or Trusted).
+
+---
+ 
+## Comparison with Rust
+To demonstrate the accuracy of this Python implementation, a comparison script is included. This tool runs both the official Rust c2patool and this Python tool against a dataset of images to verify parity in validation results.
+
+##### Usage
+
+```bash
+python3 compare_result.py <path_to_dataset_folder>
+```
+
+###### Output
+
+The script generates two files containing the results:
+
+##### trust_comparison.csv: 
+A CSV file containing the raw validation state for every image (Rust vs. Python).
+
+##### trust_report.html: 
+An interactive HTML report visualizing the results, highlighting matches/mismatches, and providing accuracy statistics.

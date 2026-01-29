@@ -22,7 +22,7 @@ TRUST_ARGS = [
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".tiff", ".mov", ".mp4", ".dng", ".avi", ".mp3", ".wav", ".pdf", ".heic", ".m4a", ".avif", ".gif", ".heif", ".TIF"}
 
 def run_json(cmd):
-    """Esegue un comando e parsa l'output JSON."""
+    """Run a command and parse its JSON output."""
     try:
         result = subprocess.run(
             cmd,
@@ -33,7 +33,7 @@ def run_json(cmd):
         )
         return json.loads(result.stdout)
     except subprocess.CalledProcessError:
-        # Solitamente c2patool ritorna errore se non trova il manifesto o il file è corrotto
+        # not a valid manifest or tool error
         return {"validation_state": "ERROR_TOOL_FAILED"}
     except json.JSONDecodeError:
         return {"validation_state": "ERROR_JSON_PARSE"}
@@ -41,10 +41,11 @@ def run_json(cmd):
         return {"validation_state": "ERROR_GENERIC"}
 
 def get_validation_state(data):
+    """Extract validation state from tool output."""
     return data.get("validation_state", "MISSING")
 
 def generate_html_report(rows, stats, folder_stats):
-    """Genera un report HTML professionale."""
+    """Generate a HTML report."""
     
     html_content = f"""
     <!DOCTYPE html>
@@ -172,29 +173,32 @@ def generate_html_report(rows, stats, folder_stats):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
-    print(f"\n✅ HTML Report written to: {os.path.abspath(OUTPUT_HTML)}")
+    print(f"\n HTML Report written to: {os.path.abspath(OUTPUT_HTML)}")
 
 def main():
-    if not DATASET_DIR.exists():
-        print(f"❌ Error: Dataset directory '{DATASET_DIR}' not found.")
+    if len(sys.argv) < 2:
+        print("Usage: python compare_result.py <PATH> ")
+        sys.exit(1)
+    
+    if not Path(sys.argv[1]).exists():
+        print(f"Error: Dataset directory '{sys.argv[1]}' not found.")
         return
 
-    print(f"🚀 Starting comparison on '{DATASET_DIR}'...\n")
-
+    print(f"Starting comparison on '{sys.argv[1]}'...\n")
     rows = []
     
-    # Statistiche globali
+    # Global result
     stats = {"total": 0, "correct": 0, "mismatch": 0}
-    # Statistiche per cartella
+    # Folder result
     folder_stats = defaultdict(lambda: {"total": 0, "correct": 0, "mismatch": 0})
 
-    files = sorted([f for f in DATASET_DIR.rglob("*") if f.suffix.lower() in IMAGE_EXTS])
+    files = sorted([f for f in Path(sys.argv[1]).rglob("*") if f.suffix.lower() in IMAGE_EXTS])
 
     for i, image in enumerate(files):
-        relative_path = image.relative_to(DATASET_DIR)
+        relative_path = image.relative_to(Path(sys.argv[1]))
         folder_name = relative_path.parts[0] if len(relative_path.parts) > 1 else "Root"
         
-        # Progress bar semplice
+        # Progress bar
         print(f"[{i+1}/{len(files)}] Processing: {relative_path}", end="\r")
 
         # --- Rust / c2patool ---
@@ -249,7 +253,7 @@ def main():
         writer = csv.writer(f)
         writer.writerow(["Image", "Rust_validation", "Python_validation", "Result"])
         writer.writerows(rows)
-    print(f"\n✅ CSV Data written to: {OUTPUT_CSV}")
+    print(f"\n CSV Data written to: {OUTPUT_CSV}")
 
     # Scrittura HTML
     generate_html_report(rows, stats, folder_stats)
