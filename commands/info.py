@@ -261,9 +261,7 @@ def print_info(image_path):
         print(f"{manifest_count} manifest{'s' if manifest_count != 1 else ''}")
         
     except Exception as e:
-        print(f"Error reading manifest: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"No manifest found in {image_path}")
         sys.exit(1)
 
 def cmd_info(path: str):

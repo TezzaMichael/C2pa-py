@@ -122,10 +122,8 @@ def print_tree(image_path):
                 is_last = (i == len(ingredients) - 1)
                 print_ingredient_tree(ingredient, manifests, "", is_last)
         
-    except Exception as e:
-        print(f"Error reading manifest: {e}")
-        import traceback
-        traceback.print_exc()
+    except Exception:
+        print(f"No manifest found in {image_path}")
         sys.exit(1)
 
 

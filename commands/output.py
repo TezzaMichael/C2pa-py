@@ -61,9 +61,7 @@ def save_output(image_path, output_dir):
         print(f'Manifest report written to the directory "{output_dir}"')
         
     except Exception as e:
-        print(f"Error processing manifest: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"No manifest found in {image_path}")
         sys.exit(1)
 
 def cmd_output(image_path, output_dir):

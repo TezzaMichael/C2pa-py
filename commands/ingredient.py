@@ -33,9 +33,7 @@ def print_ingredient(image_path):
         print(json.dumps(ingredient_output, indent=2, ensure_ascii=False))
         
     except Exception as e:
-        print(f"Error reading manifest: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"No manifest found in {image_path}")
         sys.exit(1)
 
 

@@ -8,7 +8,7 @@ Usage:
     python c2pa.py <PATH> --tree                       # Show tree view
     python c2pa.py <PATH> --detailed                   # Detailed JSON output
     python c2pa.py <PATH> --ingredient                 # Extract ingredients
-    python c2pa.py <PATH> --output <FOLDER>          # Save JSON to file
+    python c2pa.py <PATH> --output <FOLDER>            # Save JSON to file
     python c2pa.py <PATH> trust                        # Trust verification
     python c2pa.py <PATH> trust --help                 # Trust options help
 """
@@ -34,6 +34,11 @@ def cmd_default(path: str):
     try:
         reader = c2pa.Reader(path)
         raw_output = reader.json()
+
+        if not raw_output:
+            print(f"No manifest found in {path}")
+            return
+        
         json_data = json.loads(raw_output)
         print(json.dumps(json_data, indent=2))
     except Exception:
@@ -118,6 +123,8 @@ def main():
             print(f"Warning: Unknown option: {arg}", file=sys.stderr)
             print("Use --help for usage information.", file=sys.stderr)
             sys.exit(1)
+            
+        sys.exit(0)
     
 
 def print_help():
@@ -145,7 +152,7 @@ EXAMPLES:
     python c2pa.py image.png                           # Print JSON manifest
     python c2pa.py image.png --info                    # Show info
     python c2pa.py image.png --tree                    # Show tree view
-    python c2pa.py image.png --output path   # Save to file
+    python c2pa.py image.png --output path             # Save to file
     python c2pa.py image.png trust                     # Verify trust
     python c2pa.py image.png trust --help              # Trust options
 
