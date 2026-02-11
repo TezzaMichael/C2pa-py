@@ -21,6 +21,7 @@ def print_detailed(image_path):
         if not raw_output:
             print(f"No manifest found in {image_path}")
             return
+        
         json_data = json.loads(raw_output)
             
         # Convert to detailed format (matching Rust output structure)

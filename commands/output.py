@@ -10,35 +10,6 @@ import sys
 import requests
 import c2pa
 
-DEFAULT_ANCHORS = 'https://contentcredentials.org/trust/anchors.pem'
-DEFAULT_ALLOWED = 'https://contentcredentials.org/trust/allowed.sha256.txt'
-DEFAULT_CONFIG = 'https://contentcredentials.org/trust/store.cfg'
-
-CONFIG_URLS = {
-    "anchors": os.environ.get('C2PATOOL_TRUST_ANCHORS', DEFAULT_ANCHORS),
-    "allowed": os.environ.get('C2PATOOL_ALLOWED_LIST', DEFAULT_ALLOWED),
-    "config": os.environ.get('C2PATOOL_TRUST_CONFIG', DEFAULT_CONFIG)
-}
-
-FILES = {
-    "anchors": "anchors.pem",
-    "allowed": "allowed.sha256.txt",
-    "config": "store.cfg"
-}
-
-
-def download_trust_files():
-    """Download trust configuration files if not present"""
-    for key, url in CONFIG_URLS.items():
-        if not os.path.exists(FILES[key]):
-            try:
-                r = requests.get(url, timeout=10)
-                with open(FILES[key], 'wb') as f:
-                    f.write(r.content)
-            except:
-                pass
-
-
 def read_file_content(filename):
     """Read file content"""
     if os.path.exists(filename):
@@ -61,31 +32,7 @@ def extract_manifest_only(json_data):
 
 
 def save_output(image_path, output_dir):
-    """Save manifest to output directory"""
-    
-    # Download trust files
-    download_trust_files()
-    
-    # Load trust configuration
-    anchors = read_file_content(FILES["anchors"])
-    allowed = read_file_content(FILES["allowed"])
-    cfg = read_file_content(FILES["config"])
-    
-    settings = {"verify": {"verify_trust": True}, "trust": {}}
-    if anchors:
-        settings["trust"]["trust_anchors"] = anchors
-    if allowed:
-        settings["trust"]["allowed_list"] = allowed
-    if cfg:
-        settings["trust"]["trust_config"] = cfg
-    
-    # Load settings into c2pa
-    try:
-        if hasattr(c2pa, 'load_settings'):
-            c2pa.load_settings(json.dumps(settings))
-    except:
-        pass
-    
+    """Save manifest to output directory""" 
     # Read manifest
     try:
         reader = c2pa.Reader(image_path)
@@ -95,14 +42,7 @@ def save_output(image_path, output_dir):
             print(f"No manifest found in {image_path}")
             sys.exit(1)
         
-        # Parse JSON
-        if isinstance(raw_output, str):
-            json_data = json.loads(raw_output)
-        elif isinstance(raw_output, dict):
-            json_data = raw_output
-        else:
-            print(f"Invalid manifest data")
-            sys.exit(1)
+        json_data = json.loads(raw_output)
         
         # Create output directory if it doesn't exist
         os.makedirs(output_dir, exist_ok=True)

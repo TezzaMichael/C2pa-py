@@ -226,14 +226,7 @@ def print_info(image_path):
             print(f"No manifest found in {image_path}")
             return
         
-        # Parse JSON
-        if isinstance(raw_output, str):
-            json_data = json.loads(raw_output)
-        elif isinstance(raw_output, dict):
-            json_data = raw_output
-        else:
-            print(f"Invalid manifest data")
-            return
+        json_data = json.loads(raw_output)
         
         # Get file size
         file_size = get_file_size(image_path)

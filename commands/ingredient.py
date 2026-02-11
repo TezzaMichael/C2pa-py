@@ -24,14 +24,7 @@ def print_ingredient(image_path):
             print(f"No manifest found in {image_path}")
             return
         
-        # Parse JSON
-        if isinstance(raw_output, str):
-            json_data = json.loads(raw_output)
-        elif isinstance(raw_output, dict):
-            json_data = raw_output
-        else:
-            print(f"Invalid manifest data")
-            return
+        json_data = json.loads(raw_output)
         
         # Build ingredient output
         ingredient_output = build_ingredient_output(image_path, json_data)
