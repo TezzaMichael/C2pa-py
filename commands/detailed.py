@@ -63,20 +63,6 @@ def convert_to_detailed_format(json_data):
                 else:
                     claim['claim_generator_info'] = claim_gen
             
-            # Add signature reference
-            claim['signature'] = f"self#jumbf=/c2pa/{manifest_id}/c2pa.signature"
-            
-            # Add created_assertions from assertions
-            if 'assertions' in manifest_data:
-                created_assertions = []
-                for assertion in manifest_data['assertions']:
-                    label = assertion.get('label', '')
-                    created_assertions.append({
-                        'url': f"self#jumbf=c2pa.assertions/{label}",
-                        'hash': ''  # Hash would need to be calculated
-                    })
-                claim['created_assertions'] = created_assertions
-            
             # Add title
             if 'title' in manifest_data:
                 claim['dc:title'] = manifest_data['title']

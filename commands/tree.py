@@ -48,7 +48,7 @@ def print_ingredient_tree(ingredient, manifests, prefix="", is_last=False):
         # Print assertions for this ingredient
         assertions = manifest_data.get('assertions', [])
         
-        # Filter assertions (exclude hash assertions typically)
+        # Filter assertions
         visible_assertions = [a for a in assertions 
                              if not a.get('label', '').startswith('c2pa.hash')]
         

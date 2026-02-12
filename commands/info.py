@@ -48,10 +48,7 @@ def calculate_manifest_size(image_path):
             elif b'ftyp' in header or header[4:8] == b'ftyp':
                 return get_mp4_manifest_size(f)
             
-            # Fallback: estimate ~3% of file size
-            f.seek(0, 2)  # Seek to end
-            file_size = f.tell()
-            return int(file_size * 0.03)
+            return 0
             
     except:
         return 0
@@ -158,53 +155,14 @@ def get_mp4_manifest_size(f):
 
 
 def extract_validation_issues(json_data):
-    """Extract ALL validation issues including duplicates from all manifests"""
+    """Extract ALL validation issues from all manifests"""
     issues = []
     
-    # 1. Top-level validation_status
     validation_status = json_data.get('validation_status', [])
     for status in validation_status:
         code = status.get('code', '')
         if code:
             issues.append(code)
-    
-    # 2. Check EACH manifest individually for validation_status
-    manifests = json_data.get('manifests', {})
-    for manifest_id, manifest_data in manifests.items():
-        manifest_validation_status = manifest_data.get('validation_status', [])
-        for status in manifest_validation_status:
-            code = status.get('code', '')
-            if code:
-                issues.append(code)
-    
-    # 3. Check validation_results activeManifest failures
-    val_results = json_data.get('validation_results', {})
-    active = val_results.get('activeManifest', {})
-    failures = active.get('failure', [])
-    for failure in failures:
-        code = failure.get('code', '')
-        if code:
-            issues.append(code)
-    
-    # 4. Check ingredient deltas failures
-    ingredient_deltas = val_results.get('ingredientDeltas', [])
-    for delta in ingredient_deltas:
-        val_deltas = delta.get('validationDeltas', {})
-        ing_failures = val_deltas.get('failure', [])
-        for failure in ing_failures:
-            code = failure.get('code', '')
-            if code:
-                issues.append(code)
-    
-    # 5. Check ingredients inside manifests
-    for manifest_id, manifest_data in manifests.items():
-        ingredients = manifest_data.get('ingredients', [])
-        for ingredient in ingredients:
-            ing_val_status = ingredient.get('validation_status', [])
-            for status in ing_val_status:
-                code = status.get('code', '')
-                if code:
-                    issues.append(code)
     
     return issues
 
